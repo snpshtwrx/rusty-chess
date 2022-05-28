@@ -21,18 +21,18 @@ pub mod chessboard {
 
     pub enum Gamestates {
         Playing,
-        Draw,
+        Draw(String),
         Stalemate,
-        Mate,
-        CheckMate,
+        Check(bool),
+        Mate(String),
     }
 
     impl Gamestates {
         pub fn print_result(&self) {
             match self {
-                Gamestates::CheckMate => println!("Someone won by checkmate!"),
+                Gamestates::Mate(msg) => println!("Checkmate! {}", &msg),
                 Gamestates::Stalemate => println!("Stalemate"),
-                Gamestates::Draw => println!("Draw"),
+                Gamestates::Draw(msg) => println!("Draw, due to {}", &msg),
                 _ => println!("Unexpected termination of the game!"),
             }
         }
